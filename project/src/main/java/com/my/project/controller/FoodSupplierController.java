@@ -58,8 +58,9 @@ public class FoodSupplierController {
 			String fooditemname[] = request.getParameterValues("fooditemname");
 			String description[] = request.getParameterValues("description");
 			String price[] = request.getParameterValues("price");
+			String foodType[] = request.getParameterValues("foodtype");
 			
-			FoodSupplier fs = foodSupplierDao.updateMenu((Integer.parseInt(id)),fooditemname,description,price); 
+			FoodSupplier fs = foodSupplierDao.updateMenu((Integer.parseInt(id)),foodType,fooditemname,description,price); 
 
 			System.out.print("loginUser");
 
@@ -157,11 +158,11 @@ System.out.println("Food Supplier signup");
 	@RequestMapping (value= "/foodSupplier/viewMenu.htm" , method = RequestMethod.GET)
 	protected ModelAndView viewMenu(HttpServletRequest request) throws FoodSupplierException
 	{
+		HttpSession session = request.getSession();
+		FoodSupplier fs =(FoodSupplier)session.getAttribute("foodSupplier");
 		System.out.println("Redirecting to View Menu");
-		String id = request.getParameter("foodSupplier");
+		long id = fs.getPersonID();
 		System.out.println("Id"+id);
-		FoodSupplier fs = foodSupplierDao.get(Integer.parseInt(id)); 
-		System.out.println("Id--"+id);
 		return  new ModelAndView("foodSupplierViewMenu","foodSupplier",fs);
 	}
 

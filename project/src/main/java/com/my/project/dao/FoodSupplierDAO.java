@@ -45,7 +45,7 @@ public class FoodSupplierDAO extends DAO{
 		
 	}
 	
-	public FoodSupplier updateMenu(int id,String fooditemname[],String description[],String price[]) throws FoodSupplierException {
+	public FoodSupplier updateMenu(int id,String foodType[],String fooditemname[],String description[],String price[]) throws FoodSupplierException {
 		try {
 			
 			
@@ -66,6 +66,9 @@ public class FoodSupplierDAO extends DAO{
 				System.out.println("description"+i+""+description[i]);
 				foodItem.setPrice(Long.parseLong(price[i]));
 				System.out.println("price"+i+""+price[i]);
+				foodItem.setType(foodType[i]);
+				System.out.println("FoodType"+i+""+price[i]);
+				foodItem.setMenu(menu);
 				list.add(foodItem);
 				
 			}

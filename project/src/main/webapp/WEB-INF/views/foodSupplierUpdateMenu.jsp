@@ -7,7 +7,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Update Menu</title>
 </head>
 <body>
 
@@ -21,14 +21,14 @@
   <tr>
   <td>FoodItem Type</td>
   <td>
-      <select>
-     <option>Starters</option>
-     <option>Breads</option>
-     <option>Rice</option>
-     <option>Chinese</option>
-     <option>Soups</option>
-     <option>Beverages</option>
-     <option>Deserts</option>
+      <select name="foodtype">
+     <option value="Starters">Starters</option>
+     <option value="Breads">Breads</option>
+     <option value="Rice">Rice</option>
+     <option value="Chinese">Chinese</option>
+     <option value="Soups">Soups</option>
+     <option value="Beverages">Beverages</option>
+     <option value="Desserts">Desserts</option>
 	</select> 
 	
 </td>	
@@ -73,7 +73,7 @@
 $("#addMore").click(function(e) {
     e.preventDefault();
     alert("BUTTON CLICKED");
-    $(this).parent().parent().before($("<tr><td>&nbsp;</td></tr><tr><td>FoodItem Type</td><td><select><option>Starters</option><option>Breads</option><option>Rice</option><option>Chinese</option><option>Soups</option><option>Beverages</option><option>Deserts</option></select></td></tr><tr><td>FoodItem Name</td><td><input type='text'  placeholder='FoodItemName'  name='fooditemname'/></td></tr><tr><td>FoodItem Description</td><td><input type='text'  placeholder='description'  name='description'/></td></tr><tr><td>FoodItem Price</td><td><input type='text'  placeholder='price' name='price'/></td></tr>"));//{
+    $(this).parent().parent().before($("<tr><td>&nbsp;</td></tr><tr><td>FoodItem Type</td><td><select name='foodtype'><option value='Starters'>Starters</option><option value='Breads'>Breads</option><option value='Rice'>Rice</option><option value='Chinese'>Chinese</option><option value='Soups'>Soups</option><option value='Beverages'>Beverages</option><option value='Desserts'>Desserts</option></select></td></tr><tr><td>FoodItem Name</td><td><input type='text'  placeholder='FoodItemName'  name='fooditemname'/></td></tr><tr><td>FoodItem Description</td><td><input type='text'  placeholder='description'  name='description'/></td></tr><tr><td>FoodItem Price</td><td><input type='text'  placeholder='price' name='price'/></td></tr>"));//{
 	//$("<tr><td>I am here</td></tr>");   
    // $("<tr>"+"<td>FoodItem Type</td>"+"<td>"+"<select>"+"<option>Starters</option>"+"<option>Breads</option>"+"<option>Rice</option>"+"<option>Chinese</option>"+"<option>Soups</option>"+"<option>Beverages</option>"+"<option>Deserts</option>"+"</select>"+"</td>"+"</tr>");	
    // $("#fieldList").append("<tr>"+"<td>FoodItem Type</td>"+"<td>"+"<select>"+"<option>Starters</option>"+"<option>Breads</option>"+"<option>Rice</option>"+"<option>Chinese</option>"+"<option>Soups</option>"+"<option>Beverages</option>"+"<option>Deserts</option>"+"</select>"+"</td>"+"</tr>");
