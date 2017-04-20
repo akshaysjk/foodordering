@@ -1,11 +1,15 @@
 package com.my.project.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,14 +19,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.project.dao.FoodSupplierDAO;
 
 import com.my.project.exception.FoodSupplierException;
-
+import com.my.project.pojo.FoodItem;
 import com.my.project.pojo.FoodSupplier;
 import com.my.project.pojo.Menu;
+import com.my.project.pojo.User;
 import com.my.project.validator.FoodSupplierValidator;
 
 
@@ -34,15 +40,15 @@ public class FoodSupplierController {
     @Qualifier("foodSupplierDao")
 	FoodSupplierDAO foodSupplierDao;
 
-	@Autowired
-	@Qualifier("foodSupplierValidator")
-	FoodSupplierValidator validator;
-
-	@InitBinder
-	private void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
-	}
-	
+//	@Autowired
+//	@Qualifier("foodSupplierValidator")
+//	FoodSupplierValidator validator;
+//
+//	@InitBinder
+//	private void initBinder(WebDataBinder binder) {
+//		binder.setValidator(validator);
+//	}
+//	
 	@RequestMapping(value = "foodSupplier/signup.htm", method = RequestMethod.GET)
 	protected ModelAndView foodSupplierSignup(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		return new ModelAndView("foodsupplierSignup","foodSupplier",new FoodSupplier());
@@ -165,5 +171,39 @@ System.out.println("Food Supplier signup");
 		System.out.println("Id"+id);
 		return  new ModelAndView("foodSupplierViewMenu","foodSupplier",fs);
 	}
+	
+	@RequestMapping(value="/foodSupplier/viewRestaurantMenu.htm", method = RequestMethod.GET)
+    public ModelAndView displayRestaurantMenu(HttpServletRequest request) throws Exception
+    {
+    	String id = request.getParameter("id");
+    	FoodSupplier fs = foodSupplierDao.get(Integer.parseInt(id));
+    	ModelAndView mv = new ModelAndView();
+    	
+    	mv.addObject("foodSupplier",fs);
+    	
+		
+		System.out.println("Inside view Restaurants--3");
+		
+		mv.setViewName("displayMenu");
+		return mv;
+    }
+//	
+//	@RequestMapping(value = "/customer/addToCart.htm", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+//    public @ResponseBody
+//    String activateSeller(HttpServletRequest request) throws SellerException {
+//        String output = "";
+//        try {
+//            int aid = Integer.parseInt(request.getParameter("aid"));
+//            System.out.println("ID is: "+aid);
+//            sellerDao.activateSeller(aid);
+//            output = String.valueOf(aid);
+//        } catch(HibernateException e) {
+//            System.out.println("Exception: " + e.getMessage());
+//        }
+//        return output;
+//    }
+//	
+	
+	
 
 }

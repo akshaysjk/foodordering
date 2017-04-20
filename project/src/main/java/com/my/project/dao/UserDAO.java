@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import com.my.project.dao.DAO;
 import com.my.project.exception.UserException;
 import com.my.project.pojo.Address;
+import com.my.project.pojo.Cart;
 import com.my.project.pojo.Email;
 import com.my.project.pojo.FoodSupplier;
 import com.my.project.pojo.Person;
@@ -117,10 +118,13 @@ public class UserDAO extends DAO {
 			user.setFirstName(u.getFirstName());
 			System.out.println("After manageAddresses method--5");
 			user.setLastName(u.getLastName());
+			
 			System.out.println("After manageAddresses method--6");
 			user.setEmail(email);
 			System.out.println("After manageAddresses method--7");
 			email.setUser(user);
+		
+			
 			user.setAddresses(u.getAddresses());
 			System.out.println("After manageAddresses method--8");
 			getSession().save(user);

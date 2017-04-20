@@ -11,8 +11,9 @@
 <h1>Hi, ${foodSupplier.firstName}</h1>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <input type="hidden" value="${foodSupplier.personID}" name= "foodSupplier">
-<c:out value="${contextPath}"></c:out>
-  <a href="${pageContext.request.contextPath}/foodSupplier/UpdateMenu.htm">Update Menu</a>
+
+  <a href="${pageContext.request.contextPath}/foodSupplier/UpdateMenu.htm">Add Fooditems to Menu</a>
+  <br>
   <a href="${pageContext.request.contextPath}/foodSupplier/viewMenu.htm">View Menu</a>
 
 </body>

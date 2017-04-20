@@ -14,6 +14,7 @@ import com.my.project.pojo.FoodSupplier;
 import com.my.project.pojo.Menu;
 import com.my.project.pojo.User;
 
+
 public class FoodSupplierDAO extends DAO{
 
 	public FoodSupplierDAO() {
@@ -44,6 +45,7 @@ public class FoodSupplierDAO extends DAO{
 		
 		
 	}
+	
 	
 	public FoodSupplier updateMenu(int id,String foodType[],String fooditemname[],String description[],String price[]) throws FoodSupplierException {
 		try {
@@ -146,6 +148,20 @@ public class FoodSupplierDAO extends DAO{
 			throw new FoodSupplierException("Exception while creating foodSupplier: " + e.getMessage());
 		}
 	}
+	
+	public List<FoodSupplier> list() throws FoodSupplierException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from FoodSupplier");
+            List<FoodSupplier> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new FoodSupplierException("Could not list the foodSuppliers", e);
+        }
+    }
+	
 
 	public void delete(FoodSupplier foodSupplier) throws FoodSupplierException {
 		try {
@@ -157,4 +173,70 @@ public class FoodSupplierDAO extends DAO{
 			throw new FoodSupplierException("Could not delete foodSupplier " + foodSupplier.getUsername(), e);
 		}
 	}
+	
+	public void updateFoodItem(long id,String foodItemName,String description,long price) throws FoodSupplierException {
+		try {
+			begin();
+			String hql = "update FoodItem set name = :name, description = :description, price = :price WHERE fooditemID = :fooditemID";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("name", foodItemName);
+		query.setParameter("description", description);
+		query.setLong("price", price);
+		query.setLong("fooditemID", id);
+		System.out.println("Id "+id+"description"+description+"foodItemName"+foodItemName+"Price"+price);
+		int result = query.executeUpdate();
+		System.out.println("Rows affected: " + result);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new FoodSupplierException("Could not delete foodItem " +foodItemName, e);
+		}
+	}
+	
+	public FoodItem getFoodItem(int foodItemId) throws FoodSupplierException
+	{
+		try {
+			begin();
+			Query q = getSession().createQuery("from FoodItem where fooditemID= :fooditemID");
+			q.setInteger("fooditemID", foodItemId);		
+			FoodItem fi = (FoodItem) q.uniqueResult();
+			System.out.println("Got the foodItem with ID" +fi.getFooditemID());
+			//commit();
+			return fi;
+		} catch (HibernateException e) {
+			rollback();
+			throw new FoodSupplierException("Could not get foodItem " + foodItemId, e);
+		}
+	}
+	
+	public List<FoodItem> getFoodItems(long menuId) throws FoodSupplierException
+	{
+		try {
+			begin();
+			Query q = getSession().createQuery("from FoodItem where menu= :menuId");
+			q.setLong("menuId", menuId);		
+			List<FoodItem> fi = q.list();
+			//commit();
+			return fi;
+		} catch (HibernateException e) {
+			rollback();
+			throw new FoodSupplierException("Could not get foodItem " + menuId, e);
+		}
+	}
+	
+	public void deleteFoodItem(int foodItemID) throws FoodSupplierException
+	{
+		try {
+			begin();
+			FoodItem fi= getFoodItem(foodItemID);
+			getSession().delete(fi);
+			commit();
+			System.out.println("Deleted Successfuuly from DAO method");
+		} catch (HibernateException e) {
+			rollback();
+			throw new FoodSupplierException("Could not get foodItem " + foodItemID, e);
+		}
+	}
+	
+	
 }

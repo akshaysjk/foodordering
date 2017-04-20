@@ -64,7 +64,7 @@
 
   </table>
   <br>
-  <input type="submit" value="Update" />
+  <input type="submit" value="Add" />
 </form>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

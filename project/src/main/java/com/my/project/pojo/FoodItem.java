@@ -1,11 +1,16 @@
 package com.my.project.pojo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +28,7 @@ public class FoodItem {
 	@ManyToOne
 	private Menu menu;
 	
-	@ManyToOne
-	private User user;
+	
 	
 	@Column(name="description")
 	private String description;
@@ -38,22 +42,16 @@ public class FoodItem {
 	@Column(name="quantity")
 	private int qunatity;
 	
+	@OneToMany(mappedBy = "foodItem")
+	private List<Cart> cart;
+	
 	
 	public FoodItem() {
+		
 		
 	}
 
 	
-	
-	public User getUser() {
-		return user;
-	}
-
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 
 
@@ -118,6 +116,26 @@ public class FoodItem {
 	public void setQunatity(int qunatity) {
 		this.qunatity = qunatity;
 	}
+
+
+
+
+
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+
+
+
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+
+
+
+
 	
 	
 

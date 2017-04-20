@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>ViewMenu</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -18,12 +16,50 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script> 
+	$(function(){
+	    var $select = $(".1-10");
+	    for (i=1;i<=10;i++){
+	        $select.append($('<option></option>').val(i).html(i))
+	    }
+	});
+	</script>
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						$('.addToCart')
+								.click(
+										function(e) {
+											//alert("Alert");
+											
+											e.preventDefault();
+											var quantityId = $(this).parent().siblings(".col-sm-1").data("quantity");
+											var quantity = $("#select-"+quantityId+" option:selected").val();
+											var id = $(this).parent()
+													.data("id");
+											var urlPath = "${pageContext.request.contextPath}/customer/addToCart.htm?id="
+													+ id+"&quantity="+quantity;
+											alert(urlPath);
+											$.ajax({
+												url : urlPath,
+												type : 'GET',
+												success : function(response) {
+													alert(response);
+													
+											}
+										});
+										});
+					});
+</script>
+<title>Insert title here</title>
 </head>
 <body>
-<h2>Menu</h2>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-      <form:form action="${contextPath}/foodSupplier/UpdateAndDeleteFoodItemPage.htm" commandName="foodSupplier" method="post">
-  		<div class="w3-container">
+	<div class="w3-container">
 		<div class="w3-panel w3-card-4">
 
 			<c:set var="starters" value="true" />
@@ -38,8 +74,19 @@
 					</c:if>
 					<c:set var="starters" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
+						</div>
+						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
 						</div>
 					</div>
 					<div class="row">
@@ -66,10 +113,20 @@
 					</c:if>
 					<c:set var="breads" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
-					
+						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -94,11 +151,21 @@
 						</div>
 					</c:if>
 					<c:set var="rice" value="false" />
-					<div class="row">
-						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
 						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -124,10 +191,20 @@
 					</c:if>
 					<c:set var="chinese" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
-					
+						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -153,10 +230,20 @@
 					</c:if>
 					<c:set var="soups" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
 						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -183,10 +270,20 @@
 					</c:if>
 					<c:set var="beverages" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
 						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -212,10 +309,20 @@
 					</c:if>
 					<c:set var="desserts" value="false" />
 					<div class="row">
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<c:out value="${foodItems.name}" />
 						</div>
 						
+							<div class="col-sm-1" data-quantity="${foodItems.fooditemID}">
+							
+							<select class="1-10" id="select-${foodItems.fooditemID}"></select>
+								
+						</div>
+						<div class="col-sm-3" data-id="${foodItems.fooditemID}">
+							
+							<a class="addToCart" href="#">Add to Cart</a>
+								
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-10">
@@ -230,9 +337,6 @@
 			</c:forEach>
 
 		</div>
-	</div> 
-  <br>
-  <input type="submit" value="Update" />
-</form:form>
+	</div>
 </body>
 </html>

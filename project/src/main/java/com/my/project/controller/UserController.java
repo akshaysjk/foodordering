@@ -24,13 +24,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.project.dao.FoodSupplierDAO;
 import com.my.project.dao.UserDAO;
 import com.my.project.exception.UserException;
 import com.my.project.pojo.Address;
 import com.my.project.pojo.FoodSupplier;
+import com.my.project.pojo.Menu;
 import com.my.project.pojo.Person;
 import com.my.project.pojo.User;
 import com.my.project.validator.UserValidator;
+
 
 @Controller
 public class UserController {
@@ -38,6 +41,10 @@ public class UserController {
 	@Autowired
     @Qualifier("userDao")
 	UserDAO userDao;
+	
+	@Autowired
+    @Qualifier("foodSupplierDao")
+	FoodSupplierDAO foodSupplierDao;
 
 	@Autowired
 	@Qualifier("userValidator")
@@ -255,5 +262,31 @@ public class UserController {
 //	        }
 	        
 	    }
+	    
+	    
+	    @RequestMapping(value="/customer/viewRestaurants.htm", method = RequestMethod.GET)
+		public ModelAndView viewRestaurants(HttpServletRequest request) throws Exception {		
+			ModelAndView mv = new ModelAndView();
+			System.out.println("Inside view Restaurants--1");
+			List<FoodSupplier> list = foodSupplierDao.list();
+			for(int i=0;i<list.size();i++)
+			{
+				System.out.println("Fname" +list.get(i).getFirstName());
+				System.out.println("Lname" +list.get(i).getLastName());
+				System.out.println("Phone" +list.get(i).getPhoneDetails());
+				System.out.println("Card" +list.get(i).getCardDetails());
+			}
+			mv.addObject("foodSuppliers", list);
+			System.out.println("Inside view Restaurants--2");
+			HttpSession session = request.getSession();
+			User user =(User)session.getAttribute("user");
+			System.out.println("Inside view Restaurants--3");
+			mv.addObject("user", user);
+			System.out.println("Inside view Restaurants--4");
+			mv.setViewName("viewRestaurants");
+			return mv;
+		}
+	    
+	    
 
 }

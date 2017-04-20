@@ -119,6 +119,29 @@
 </form:form>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src='../resources/js/app.js'></script>					
+<script type="text/javascript" src='../resources/js/app.js'></script>
+<script>
+
+$("#add").click( function(e) {
+	  e.preventDefault();
+	  alert("ADD CLICKED");
+    $(this).before(function() {
+  	  var index =$(this).data('selector');
+        var html = '<div id="addresses' + index + '.wrapper" class="hidden">';                    
+        html += '<tr><td>Area:</td><td><input type="text" id="addresses' + index + '.area" name="addresses[' + index + '].area" /></br></td></tr>';
+        html += '<tr><td>City:</td><td><input type="text" id="addresses' + index + '.city" name="addresses[' + index + '].city" /></br></td></tr>';
+        html += '<tr><td>State:</td><td><input type="text" id="addresses' + index + '.state" name="addresses[' + index + '].state" /></br></td></tr>';
+        html += '<tr><td>Zipcode:</td><td><input type="text" id="addresses' + index + '.zipcode" name="addresses[' + index + '].zipcode" /></br></td></tr>';
+        html += '<input type="hidden" id="addresses' + index + '.remove" name="addresses[' + index + '].remove" value="0" />';
+        html += '<button id="remove" type="button" class="addresses.remove" data-index="' + index + '">remove</button>';                    
+        html += "</div>";
+        return html;
+    });
+    $("#addresses" + index + "\\.wrapper").show();
+    index++;
+    return false;
+});
+
+</script>					
 </body>
 </html>

@@ -83,8 +83,9 @@ public class User extends Person{
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<FoodItem> foodItems = new HashSet<FoodItem>();
+	
+	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+	private List<Cart> cart;
 	
 	@Column(name = "phoneDetails")
 	private int phoneDetails;
@@ -94,11 +95,16 @@ public class User extends Person{
 	
 	
 	
+
+
+
+
 	public User() {
 		super();
 		//this.addresses = new ArrayList<Address>();
 //		Address address = new Address();
 //		addresses.add(address);
+		this.cart = new ArrayList<Cart>();
 		
 	}
 	
@@ -107,7 +113,6 @@ public class User extends Person{
 	public User(String username, String password,String personType) {
 		this.username = username;
 		this.password = password;
-		
 	}
 
 //	public String getUsername() {
@@ -175,9 +180,19 @@ public class User extends Person{
 		this.addresses = addresses;
 	}
 
-	public void setFoodItems(Set<FoodItem> foodItems) {
-		this.foodItems = foodItems;
+	
+
+	public List<Cart> getCart() {
+		return cart;
 	}
+
+
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+
+
 
 	public List<Address> getAddresses() {
         return addresses;
@@ -194,19 +209,17 @@ public class User extends Person{
         address.setUser( null );
     }
     
-	public Set<FoodItem> getFoodItems() {
-        return foodItems;
-    }
+	
 
-    public void addFoodItems(FoodItem foodItem) {
-        foodItems.add( foodItem );
-        foodItem.setUser( this );
-    }
-
-    public void removeFoodItems(FoodItem foodItem) {
-    	foodItems.remove( foodItem );
-        foodItem.setUser( null );
-    }
+//    public void addFoodItems(FoodItem foodItem) {
+//        foodItem.add( foodItem );
+//        foodItem.setUser( this );
+//    }
+//
+//    public void removeFoodItems(FoodItem foodItem) {
+//    	foodItem.remove( foodItem );
+//        foodItem.setUser( null );
+//    }
 	
 
 }

@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/project</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		
 		<mapping class="com.my.project.pojo.User" />
@@ -20,6 +20,8 @@
 		<mapping class="com.my.project.pojo.Email" />
 		<mapping class="com.my.project.pojo.Admin" />
 		<mapping class="com.my.project.pojo.Address" />
+		<mapping class="com.my.project.pojo.Cart" />
+		<mapping class="com.my.project.pojo.Order" />
 		
     </session-factory>
 </hibernate-configuration>

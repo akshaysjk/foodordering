@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Entity
 @Table(name = "foodsupplier_table")
@@ -15,6 +18,9 @@ public class FoodSupplier extends Person {
 
 	@OneToOne(mappedBy = "foodSupplier" , cascade = CascadeType.ALL)
 	private Email email;
+	
+	@Transient
+	private CommonsMultipartFile photo;
 	
 	@ManyToOne
 	private Admin admin;
@@ -42,6 +48,13 @@ public class FoodSupplier extends Person {
 		
 	}
 	
+	
+	public CommonsMultipartFile getPhoto() {
+		return photo;
+	}
+	public void setPhoto(CommonsMultipartFile photo) {
+		this.photo = photo;
+	}
 	
 
 	public FoodSupplier(String username, String password) {

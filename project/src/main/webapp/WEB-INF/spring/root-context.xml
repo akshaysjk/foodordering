@@ -9,6 +9,9 @@
 	<bean id="userDao" class="com.my.project.dao.UserDAO" ></bean>
 		<bean id="foodSupplierValidator" class="com.my.project.validator.FoodSupplierValidator"></bean>
 	<bean id="foodSupplierDao" class="com.my.project.dao.FoodSupplierDAO" ></bean>
+		<bean id="foodItemValidator" class="com.my.project.validator.FoodItemValidator"></bean>
+	<bean id="foodItemDao" class="com.my.project.dao.FoodItemDAO" ></bean>
+	<bean id="cartDao" class="com.my.project.dao.CartDAO" ></bean>
 		
 	<bean id="adminDao" class="com.my.project.dao.AdminDAO" ></bean>
 </beans>
